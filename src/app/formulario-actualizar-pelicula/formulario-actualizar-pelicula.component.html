@@ -1,12 +1,14 @@
 <!-- formulario-actualizar-pelicula.component.html -->
-<!-- Asumo que el formulario tiene un modelo this.pelicula asociado -->
+<form (ngSubmit)="onSubmit()">
+  <label for="titulo">Título:</label>
+  <input type="text" id="titulo" formControlName="titulo" required>
 
-<form (ngSubmit)="actualizarPelicula()">
-  <!-- Campos del formulario para editar -->
-  <label for="title">Título:</label>
-  <input type="text" id="title" [(ngModel)]="pelicula.title" name="title" required>
+  <label for="director">Director:</label>
+  <input type="text" id="director" formControlName="director" required>
 
   <!-- Otros campos... -->
 
   <button type="submit">Actualizar Película</button>
 </form>
+
+<router-outlet></router-outlet>

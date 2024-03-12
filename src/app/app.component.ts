@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PeliculaService } from './pelicula.service';
 import { Subscription } from 'rxjs';
 import { LocalStorageService } from './local-storage.service'; // Asegúrate de importar el servicio de LocalStorage
+import { Pelicula } from './models/pelicula.model';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ import { LocalStorageService } from './local-storage.service'; // Asegúrate de 
 })
 export class AppComponent implements OnInit, OnDestroy {
   [x: string]: any;
-  peliculas: any[] = [];
+  peliculas: Pelicula[] = [];
   private subscription: Subscription = new Subscription();
 
 
@@ -25,14 +26,22 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.unsubscribe();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+      console.log('El componente se está destruyendo.');
+    }
   }
 
   private cargarPeliculasDesdeLocalStorage(): void {
-    // Recupera las películas desde el LocalStorage
-    const storedPeliculas = this.localStorageService.getItem('peliculas');
-    if (storedPeliculas) {
-      this.peliculas = storedPeliculas;
+    try {
+      const storedPeliculas = this.localStorageService.getItem('peliculas');
+      if (storedPeliculas && Array.isArray(storedPeliculas)) {
+        this.peliculas = storedPeliculas;
+      } else {
+        console.warn('Datos no válidos en el LocalStorage para "peliculas".');
+      }
+    } catch (error) {
+      console.error('Error al cargar películas desde el LocalStorage', error);
     }
   }
 
@@ -40,11 +49,11 @@ export class AppComponent implements OnInit, OnDestroy {
     this.subscription = this.peliculaService.obtenerPeliculas().subscribe(
       (peliculas) => {
         this.peliculas = peliculas;
-        // Guarda las películas en el LocalStorage
         this.localStorageService.setItem('peliculas', peliculas);
       },
       (error) => {
-        console.error('Error al obtener películas', error);
+        console.error('Error al obtener películas desde el servicio', error);
+        // Puedes mostrar un mensaje al usuario o tomar alguna otra acción aquí
       }
     );
   }

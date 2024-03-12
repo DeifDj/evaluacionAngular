@@ -5,10 +5,12 @@ import { FormularioCrearPeliculaComponent } from './formulario-crear-pelicula/fo
 import { FormularioActualizarPeliculaComponent } from './formulario-actualizar-pelicula/formulario-actualizar-pelicula.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { ListaPeliculasComponent } from './lista-peliculas/lista-peliculas.component';
+import { CatalogoPeliculasComponent } from './catalogo-peliculas/catalogo-peliculas.component';
 
 const routes: Routes = [
   { path: 'crear-pelicula/form', component: FormularioCrearPeliculaComponent },
-  { path: 'formulario-actualizar-pelicula/:id', component: FormularioActualizarPeliculaComponent },
+  { path: 'catalogo-peliculas', component: CatalogoPeliculasComponent },
+  { path: 'actualizar-pelicula/:id', component: FormularioActualizarPeliculaComponent },
   { path: 'inicio', component: InicioComponent },
   { path: 'lista-peliculas', component: ListaPeliculasComponent },
   { path: 'crear-pelicula', loadChildren: () => import('./crear-pelicula/crear-pelicula.module').then(m => m.CrearPeliculaModule) }, 

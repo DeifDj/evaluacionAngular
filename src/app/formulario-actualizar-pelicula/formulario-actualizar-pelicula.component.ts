@@ -1,4 +1,3 @@
-// formulario-actualizar-pelicula.component.ts
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PeliculaService } from '../pelicula.service';
@@ -27,6 +26,10 @@ export class FormularioActualizarPeliculaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.obtenerPeliculaId();
+  }
+
+  obtenerPeliculaId() {
     this.route.params.subscribe(params => {
       this.peliculaId = params['id'];
       this.obtenerPeliculaPorId();
@@ -53,7 +56,6 @@ export class FormularioActualizarPeliculaComponent implements OnInit {
     });
   }
 
-  // Agrega la función actualizarPelicula
   actualizarPelicula() {
     const peliculaActualizada = this.formularioPelicula.value;
     this.peliculaService.actualizarPelicula(this.peliculaId, peliculaActualizada).subscribe(
@@ -68,7 +70,7 @@ export class FormularioActualizarPeliculaComponent implements OnInit {
 
   onSubmit() {
     const peliculaActualizada = this.formularioPelicula.value;
-    this.peliculaService['actualizarPelicula'](this.peliculaId, peliculaActualizada).subscribe(
+    this.peliculaService.actualizarPelicula(this.peliculaId, peliculaActualizada).subscribe(
       (respuesta: any) => {
         console.log('Película actualizada con éxito', respuesta);
       },
@@ -78,4 +80,3 @@ export class FormularioActualizarPeliculaComponent implements OnInit {
     );
   }
 }
-
