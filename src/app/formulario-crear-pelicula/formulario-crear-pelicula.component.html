@@ -1,0 +1,12 @@
+<form [formGroup]="formularioPelicula" (ngSubmit)="onSubmit()">
+    <label for="titulo">Título:</label>
+    <input type="text" id="titulo" formControlName="titulo">
+  
+    <label for="director">Director:</label>
+    <input type="text" id="director" formControlName="director">
+  
+    <!-- Agrega más campos según tus necesidades -->
+  
+    <button type="submit" [disabled]="formularioPelicula.invalid">Crear Película</button>
+  </form>
+<router-outlet></router-outlet>
