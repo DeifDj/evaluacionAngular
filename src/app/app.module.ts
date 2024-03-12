@@ -37,7 +37,8 @@ import { CatalogoPeliculasComponent } from './catalogo-peliculas/catalogo-pelicu
     FormularioCrearPeliculaComponent,
     ListaPeliculasComponent,
     FormularioActualizarPeliculaComponent,
-    CapitalizarPipe
+    CapitalizarPipe,
+    
   ],
   
   imports: [
@@ -54,6 +55,7 @@ import { CatalogoPeliculasComponent } from './catalogo-peliculas/catalogo-pelicu
     RouterModule,
     MatListModule,
     MatCardModule,
+    
   ],
   exports: [
     CatalogoPeliculasComponent,
