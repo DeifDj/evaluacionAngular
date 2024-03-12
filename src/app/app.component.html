@@ -4,7 +4,7 @@
       <li><a routerLink="/inicio">Inicio</a></li>
       <li><a routerLink="/catalogo-peliculas">Catálogo</a></li>
       <li><a routerLink="/crear-pelicula">Crear Película</a></li>
-      <li><a routerLink="/actualizar-pelicula">Actualizar Película</a></li>
+      <li><a [routerLink]="['/actualizar-pelicula', peliculas]">Actualizar Película</a></li>
       <li><a routerLink="/lista-peliculas">Lista de Películas</a></li>
     </ul>
   </nav>
