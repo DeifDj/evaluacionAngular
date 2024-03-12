@@ -6,8 +6,9 @@
     <mat-card-content>
       <mat-list>
         <mat-list-item *ngFor="let pelicula of peliculas">
-          {{ pelicula.title }}
+          {{ pelicula.titulo }}
         </mat-list-item>
       </mat-list>
     </mat-card-content>
   </mat-card>
+  <router-outlet></router-outlet>

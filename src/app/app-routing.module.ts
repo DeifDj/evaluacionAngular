@@ -7,7 +7,7 @@ import { InicioComponent } from './inicio/inicio.component';
 import { ListaPeliculasComponent } from './lista-peliculas/lista-peliculas.component';
 
 const routes: Routes = [
-  { path: 'crear-pelicula', component: FormularioCrearPeliculaComponent },
+  { path: 'crear-pelicula/form', component: FormularioCrearPeliculaComponent },
   { path: 'formulario-actualizar-pelicula/:id', component: FormularioActualizarPeliculaComponent },
   { path: 'inicio', component: InicioComponent },
   { path: 'lista-peliculas', component: ListaPeliculasComponent },
