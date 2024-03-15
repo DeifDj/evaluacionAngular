@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PeliculaService } from './pelicula.service';
 import { Subscription } from 'rxjs';
-import { LocalStorageService } from './local-storage.service'; // Asegúrate de importar el servicio de LocalStorage
+import { LocalStorageService } from './local-storage.service';
 import { Pelicula } from './models/pelicula.model';
 
 @Component({

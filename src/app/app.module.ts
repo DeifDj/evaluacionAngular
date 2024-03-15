@@ -14,8 +14,6 @@ import { MatCardModule } from '@angular/material/card';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { InicioComponent } from './inicio/inicio.component';
-
-import { FormularioCrearPeliculaComponent } from './formulario-crear-pelicula/formulario-crear-pelicula.component';
 import { PeliculaService } from './pelicula.service';
 import { FormularioActualizarPeliculaComponent } from './formulario-actualizar-pelicula/formulario-actualizar-pelicula.component';
 import { CapitalizarPipe } from './capitalizar.pipe';
@@ -23,6 +21,9 @@ import { ListaPeliculasComponent } from './lista-peliculas/lista-peliculas.compo
 import { LocalStorageService } from './local-storage.service';
 import { DetalleModule } from './detalle/detalle.module';
 import { CatalogoPeliculasComponent } from './catalogo-peliculas/catalogo-peliculas.component';
+import { CrearPeliculaComponent } from './crear-pelicula/crear-pelicula.component';
+
+
 
 
 
@@ -34,10 +35,10 @@ import { CatalogoPeliculasComponent } from './catalogo-peliculas/catalogo-pelicu
     AppComponent,
     InicioComponent,
     CatalogoPeliculasComponent,
-    FormularioCrearPeliculaComponent,
     ListaPeliculasComponent,
     FormularioActualizarPeliculaComponent,
     CapitalizarPipe,
+    CrearPeliculaComponent
     
   ],
   
@@ -55,6 +56,8 @@ import { CatalogoPeliculasComponent } from './catalogo-peliculas/catalogo-pelicu
     RouterModule,
     MatListModule,
     MatCardModule,
+   
+    
     
   ],
   exports: [
