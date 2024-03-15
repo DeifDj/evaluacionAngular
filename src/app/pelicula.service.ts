@@ -8,6 +8,7 @@ import { catchError } from 'rxjs/operators';
 })
 export class PeliculaService {
   private apiUrl = 'https://ghibliapi.vercel.app';
+  public peliculas: any[] = []; // Definición de la propiedad peliculas
 
   constructor(private http: HttpClient) {}
 
@@ -40,7 +41,16 @@ export class PeliculaService {
         })
       );
   }
-
+  obtenerTodasLasPeliculas(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/films`)
+      .pipe(
+        catchError(error => {
+          console.error('Error al obtener todas las películas:', error);
+          return throwError(error);
+        })
+      );
+    }
+  
   // Método para crear una nueva película
   crearPelicula(data: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/films`, data)

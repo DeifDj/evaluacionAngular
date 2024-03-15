@@ -1,14 +1,27 @@
-<!-- formulario-actualizar-pelicula.component.html -->
-<form (ngSubmit)="onSubmit()">
-  <label for="titulo">Título:</label>
-  <input type="text" id="titulo" formControlName="titulo" required>
-
-  <label for="director">Director:</label>
-  <input type="text" id="director" formControlName="director" required>
-
-  <!-- Otros campos... -->
-
+<h2>Actualizar Película</h2>
+<form [formGroup]="formularioActualizar" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="pelicula">Selecciona una película:</label>
+    <select id="pelicula" formControlName="pelicula" (change)="onPeliculaSeleccionada($event)">
+      <option value="">Selecciona una película</option>
+      <option *ngFor="let pelicula of peliculas" [value]="pelicula.id">{{ pelicula.title }}</option>
+    </select>
+  </div>
+  <div>
+    <label for="titulo">Título:</label>
+    <input type="text" id="titulo" formControlName="titulo">
+  </div>
+  <div>
+    <label for="director">Director:</label>
+    <input type="text" id="director" formControlName="director">
+  </div>
+  <div>
+    <label for="descripcion">Descripción:</label>
+    <textarea id="descripcion" formControlName="descripcion"></textarea>
+  </div>
+  <!-- Agrega más campos según tus necesidades -->
   <button type="submit">Actualizar Película</button>
 </form>
+
 
 <router-outlet></router-outlet>

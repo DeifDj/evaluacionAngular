@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PeliculaService } from '../pelicula.service';
-
+import { Pelicula } from '../models/pelicula.model';
 
 @Component({
   selector: 'app-lista-peliculas',
@@ -8,19 +8,11 @@ import { PeliculaService } from '../pelicula.service';
   styleUrls: ['./lista-peliculas.component.css']
 })
 export class ListaPeliculasComponent implements OnInit {
-  peliculas: any[] = [];
+  peliculas: Pelicula[] = [];
 
-  constructor(private peliculaService: PeliculaService) {}
+  constructor(private peliculaService: PeliculaService) { }
 
   ngOnInit(): void {
-    // Llama al servicio para obtener todas las películas
-    this.peliculaService.obtenerPeliculas().subscribe(
-      (peliculas) => {
-        this.peliculas = peliculas;
-      },
-      (error) => {
-        console.error('Error al obtener películas', error);
-      }
-    );
+    this.peliculas = this.peliculaService.peliculas;
   }
 }

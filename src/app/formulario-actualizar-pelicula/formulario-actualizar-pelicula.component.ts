@@ -1,82 +1,102 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { PeliculaService } from '../pelicula.service';
 import { ActivatedRoute } from '@angular/router';
+import { PeliculaService } from '../pelicula.service';
 
 @Component({
-  selector: 'app-formulario-actualizar-pelicula',
+  selector: 'app-actualizar-pelicula',
   templateUrl: './formulario-actualizar-pelicula.component.html',
-  styleUrls: ['./formulario-actualizar-pelicula.component.css']
 })
 export class FormularioActualizarPeliculaComponent implements OnInit {
-  @Input() pelicula: any;
-  formularioPelicula: FormGroup;
-  peliculaId: string = '';
+  formularioActualizar: FormGroup;
+  peliculaId!: string;
+  peliculas: any[] = [];
 
   constructor(
     private fb: FormBuilder,
-    private peliculaService: PeliculaService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private peliculaService: PeliculaService
   ) {
-    this.formularioPelicula = this.fb.group({
+    this.formularioActualizar = this.fb.group({
+      pelicula: ['', Validators.required],
       titulo: ['', Validators.required],
       director: ['', Validators.required],
+      descripcion: ['', Validators.required],
       // Agrega más campos según tus necesidades
     });
   }
 
   ngOnInit(): void {
+    this.obtenerPeliculas();
     this.obtenerPeliculaId();
   }
 
-  obtenerPeliculaId() {
-    this.route.params.subscribe(params => {
-      this.peliculaId = params['id'];
-      this.obtenerPeliculaPorId();
-    });
-  }
-
-  obtenerPeliculaPorId() {
-    this.peliculaService.obtenerPeliculaPorId(this.peliculaId).subscribe(
-      (data) => {
-        this.pelicula = data;
-        this.actualizarFormulario();
+  obtenerPeliculas(): void {
+    this.peliculaService.obtenerPeliculas().subscribe(
+      (peliculas) => {
+        this.peliculas = peliculas;
       },
       (error) => {
-        console.error('Error obteniendo la película por ID', error);
+        console.error('Error al obtener las películas:', error);
       }
     );
   }
 
-  actualizarFormulario() {
-    this.formularioPelicula.patchValue({
-      titulo: this.pelicula.titulo,
-      director: this.pelicula.director,
-      // Actualiza con más campos según tus necesidades
-    });
+  obtenerPeliculaId(): void {
+    const peliculaIdParam = this.route.snapshot.paramMap.get('id');
+    this.peliculaId = peliculaIdParam !== null ? peliculaIdParam : '';
+    if (this.peliculaId) {
+      this.obtenerPelicula();
+    }
   }
 
-  actualizarPelicula() {
-    const peliculaActualizada = this.formularioPelicula.value;
-    this.peliculaService.actualizarPelicula(this.peliculaId, peliculaActualizada).subscribe(
-      (respuesta: any) => {
-        console.log('Película actualizada con éxito', respuesta);
-      },
-      (error: any) => {
-        console.error('Error al actualizar la película', error);
-      }
-    );
+  onPeliculaSeleccionada(event: any): void {
+    const id = event.target.value;
+    this.obtenerDatosPelicula(id);
   }
 
-  onSubmit() {
-    const peliculaActualizada = this.formularioPelicula.value;
-    this.peliculaService.actualizarPelicula(this.peliculaId, peliculaActualizada).subscribe(
-      (respuesta: any) => {
-        console.log('Película actualizada con éxito', respuesta);
-      },
-      (error: any) => {
-        console.error('Error al actualizar la película', error);
-      }
-    );
+  obtenerDatosPelicula(id: string): void {
+    const peliculaSeleccionada = this.peliculas.find(pelicula => pelicula.id === id);
+    if (peliculaSeleccionada) {
+      this.formularioActualizar.patchValue({
+        titulo: peliculaSeleccionada.titulo,
+        director: peliculaSeleccionada.director,
+        descripcion: peliculaSeleccionada.descripcion,
+      });
+    }
+  }
+
+  obtenerPelicula(): void {
+    if (this.peliculaId) {
+      this.peliculaService.obtenerPeliculaPorId(this.peliculaId).subscribe(
+        (pelicula) => {
+          this.formularioActualizar.patchValue({
+            titulo: pelicula.titulo,
+            director: pelicula.director,
+            descripcion: pelicula.descripcion,
+          });
+        },
+        (error) => {
+          console.error('Error al obtener la película:', error);
+        }
+      );
+    }
+  }
+
+  onSubmit(): void {
+    if (this.formularioActualizar.valid && this.peliculaId) {
+      const datosActualizados = this.formularioActualizar.value;
+      this.peliculaService.actualizarPelicula(this.peliculaId, datosActualizados).subscribe(
+        () => {
+          console.log('Película actualizada correctamente');
+          // Puedes redirigir a otra ruta después de la actualización si lo deseas
+        },
+        (error) => {
+          console.error('Error al actualizar la película:', error);
+        }
+      );
+    } else {
+      alert('Por favor completa todos los campos');
+    }
   }
 }

@@ -1,4 +1,10 @@
-
-<app-lista-peliculas></app-lista-peliculas>
+<ul>
+    <li *ngFor="let pelicula of peliculas">
+      <h2>{{ pelicula.titulo }}</h2>
+      <p>Director: {{ pelicula.director }}</p>
+      <p>Descripción: {{ pelicula.descripcion }}</p>
+    </li>
+  </ul>
+  
 <router-outlet></router-outlet>
 

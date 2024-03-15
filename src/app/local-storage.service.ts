@@ -1,10 +1,11 @@
-// local-storage.service.ts
 import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LocalStorageService {
+  constructor() {}
+
   setItem(key: string, value: any): void {
     localStorage.setItem(key, JSON.stringify(value));
   }
@@ -16,5 +17,11 @@ export class LocalStorageService {
 
   removeItem(key: string): void {
     localStorage.removeItem(key);
+  }
+
+  guardarPelicula(pelicula: any): void {
+    let peliculas = this.getItem('peliculas') || [];
+    peliculas.push(pelicula);
+    this.setItem('peliculas', peliculas);
   }
 }
