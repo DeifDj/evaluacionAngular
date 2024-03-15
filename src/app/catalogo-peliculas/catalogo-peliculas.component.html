@@ -1,14 +1,11 @@
+<div class="contenedor-peliculas">
+  <div class="pelicula" *ngFor="let pelicula of peliculas">
+    <img [src]="pelicula.imageUrl" alt="Imagen de la película">
+    <div class="informacion">
+      <h2 class="pelicula-titulo">{{ pelicula.title }}</h2>
+      <p class="pelicula-descripcion">{{ pelicula.description }}</p>
+    </div>
+  </div>
+</div>
 
-<mat-card>
-    <mat-card-header>
-      <mat-card-title>Catálogo de Películas</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <mat-list>
-        <mat-list-item *ngFor="let pelicula of peliculas">
-          {{ pelicula.titulo }}
-        </mat-list-item>
-      </mat-list>
-    </mat-card-content>
-  </mat-card>
   <router-outlet></router-outlet>

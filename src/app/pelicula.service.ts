@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, catchError, throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +41,7 @@ export class PeliculaService {
       );
   }
 
-  // Agregamos el método crearPelicula
+  // Método para crear una nueva película
   crearPelicula(data: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/films`, data)
       .pipe(
