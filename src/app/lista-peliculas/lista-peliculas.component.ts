@@ -13,6 +13,11 @@ export class ListaPeliculasComponent implements OnInit {
   constructor(private peliculaService: PeliculaService) { }
 
   ngOnInit(): void {
-    this.peliculas = this.peliculaService.peliculas;
+    this.obtenerPeliculas();
+  }
+
+  obtenerPeliculas(): void {
+    this.peliculas = this.peliculaService['obtenerPeliculasLocalStorage']();
   }
 }
+
