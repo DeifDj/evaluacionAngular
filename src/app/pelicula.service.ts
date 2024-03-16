@@ -2,15 +2,25 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { Pelicula } from './models/pelicula.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PeliculaService {
   [x: string]: any;
+  obtenerPeliculaDestacada() {
+    throw new Error('Method not implemented.');
+  }
   private apiUrl = 'https://ghibliapi.vercel.app';
 
   constructor(private http: HttpClient) {}
+
+  obtenerPeliculasLocalStorage(): Pelicula[] {
+    const peliculasString = localStorage.getItem('peliculas');
+    return peliculasString ? JSON.parse(peliculasString) : [];
+  }
+
 
   // Obtiene todas las películas del servidor
   obtenerTodasLasPeliculas(): Observable<any[]> {
@@ -22,10 +32,6 @@ export class PeliculaService {
       })
     );
   }
-  obtenerPeliculasLocalStorage(): any[] {
-    const peliculasString = localStorage.getItem('peliculas');
-    return peliculasString ? JSON.parse(peliculasString) : [];
-  }
 
   // Obtiene una película específica por su ID
   obtenerPeliculaPorId(id: string): Observable<any> {
@@ -36,7 +42,6 @@ export class PeliculaService {
       })
     );
   }
-  
 
   // Actualiza una película específica por su ID
   actualizarPelicula(id: string, data: any): Observable<any> {
@@ -58,8 +63,19 @@ export class PeliculaService {
     );
   }
 
+  // Elimina una película específica por su ID
+  eliminarPelicula(id: string): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/films/${id}`).pipe(
+      catchError(error => {
+        console.error(`Error al eliminar la película con ID ${id}:`, error);
+        return throwError(error);
+      })
+    );
+  }
+
   // Guarda las películas en el almacenamiento local
   private guardarPeliculasLocalStorage(peliculas: any[]): void {
     localStorage.setItem('peliculas', JSON.stringify(peliculas));
   }
 }
+

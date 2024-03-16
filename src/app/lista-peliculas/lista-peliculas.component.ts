@@ -17,7 +17,25 @@ export class ListaPeliculasComponent implements OnInit {
   }
 
   obtenerPeliculas(): void {
-    this.peliculas = this.peliculaService['obtenerPeliculasLocalStorage']();
+    this.peliculaService.obtenerTodasLasPeliculas().subscribe(
+      (peliculas: Pelicula[]) => {
+        this.peliculas = peliculas;
+      },
+      (error: any) => {
+        console.error('Error al obtener las películas:', error);
+      }
+    );
+  }
+
+  eliminarPelicula(id: string): void {
+    this.peliculaService.eliminarPelicula(id).subscribe(
+      () => {
+        // Eliminar la película del array local
+        this.peliculas = this.peliculas.filter(pelicula => pelicula.id !== id);
+      },
+      (error: any) => {
+        console.error('Error al eliminar película', error);
+      }
+    );
   }
 }
-
