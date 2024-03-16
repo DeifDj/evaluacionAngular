@@ -1,44 +1,45 @@
 /* Estilos para el contenedor de películas */
 .contenedor-peliculas {
-    overflow-x: hidden; /* Permite el desplazamiento vertical */
-    max-height: 700px; /* Altura máxima del contenedor, ajusta según sea necesario */
-  }
-  
-  /* Estilos para cada película */
-  .pelicula {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    border-bottom: 1px solid #ccc; /* Añade un borde inferior a cada película */
-    transition: transform 0.3s ease; /* Agrega una transición de movimiento suave */
-  }
-  
-  /* Estilos para cuando el cursor pasa sobre cada película */
-  .pelicula:hover {
-    transform: scale(1.05); /* Hace que la película se agrande ligeramente al pasar el cursor sobre ella */
-  }
-  
-  /* Estilos para la imagen de la película */
-  .pelicula img {
-    width: 100px; /* Ajusta el tamaño de la imagen según sea necesario */
-    height: auto;
-    margin-right: 20px; /* Ajusta el margen derecho entre la imagen y la información */
-  }
-  
-  /* Estilos para la información de la película */
-  .informacion {
-    flex-grow: 1; /* Permite que la información ocupe todo el espacio disponible */
-  }
-  
-  /* Estilos para el título de la película */
-  .pelicula-titulo {
-    font-size: 18px;
-    margin: 0; /* Elimina el margen superior e inferior del título */
-  }
-  
-  /* Estilos para la descripción de la película */
-  .pelicula-descripcion {
-    font-size: 14px;
-    color: #666;
-    margin-top: 5px; /* Ajusta el margen superior de la descripción */
-  }
+  overflow-x: hidden; /* Permite el desplazamiento vertical */
+  max-height: 700px; /* Altura máxima del contenedor, ajusta según sea necesario */
+}
+
+/* Estilos para cada película */
+.pelicula {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ccc; /* Añade un borde inferior a cada película */
+  transition: transform 0.3s ease; /* Agrega una transición de movimiento suave */
+  cursor: pointer; /* Cambia el cursor al hacer hover sobre una película */
+}
+
+/* Estilos para cuando el cursor pasa sobre cada película */
+.pelicula:hover {
+  transform: scale(1.05); /* Hace que la película se agrande ligeramente al pasar el cursor sobre ella */
+}
+
+/* Estilos para la imagen de la película */
+.pelicula img {
+  width: 100px; /* Ajusta el tamaño de la imagen según sea necesario */
+  height: auto;
+  margin-right: 20px; /* Ajusta el margen derecho entre la imagen y la información */
+}
+
+/* Estilos para la información de la película */
+.informacion {
+  flex-grow: 1; /* Permite que la información ocupe todo el espacio disponible */
+}
+
+/* Estilos para el título de la película */
+.pelicula-titulo {
+  font-size: 18px;
+  margin: 0; /* Elimina el margen superior e inferior del título */
+}
+
+/* Estilos para la descripción de la película */
+.pelicula-descripcion {
+  font-size: 14px;
+  color: #666;
+  margin-top: 5px; /* Ajusta el margen superior de la descripción */
+}

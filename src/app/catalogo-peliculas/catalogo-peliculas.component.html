@@ -1,6 +1,6 @@
 <div class="contenedor-peliculas">
   <!-- Ciclo ngFor para iterar sobre las películas -->
-  <div class="pelicula" *ngFor="let pelicula of peliculas">
+  <div class="pelicula" *ngFor="let pelicula of peliculas" (click)="mostrarDetalles(pelicula)">
     <!-- Imagen de la película -->
     <img [src]="pelicula.imageUrl" alt="Imagen de la película">
     <!-- Información de la película -->

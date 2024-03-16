@@ -1,10 +1,10 @@
 <ul>
-    <li *ngFor="let pelicula of peliculas">
-      <h2>{{ pelicula.titulo }}</h2>
-      <p>Director: {{ pelicula.director }}</p>
-      <p>Descripción: {{ pelicula.descripcion }}</p>
-    </li>
-  </ul>
-  
-<router-outlet></router-outlet>
+  <li *ngFor="let pelicula of peliculas">
+    <h2>{{ pelicula.titulo }}</h2>
+    <p>Director: {{ pelicula.director }}</p>
+    <p>Descripción: {{ pelicula.descripcion }}</p>
+    <button *ngIf="pelicula.id" (click)="eliminarPelicula(pelicula.id)">Eliminar</button>
+  </li>
+</ul>
 
+<router-outlet></router-outlet>

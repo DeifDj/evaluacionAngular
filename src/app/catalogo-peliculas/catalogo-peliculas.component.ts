@@ -40,4 +40,9 @@ export class CatalogoPeliculasComponent implements OnInit, OnDestroy {
   actualizarCatalogo(): void {
     this.obtenerPeliculas();
   }
+
+  // Agrega la función mostrarDetalles como un método del componente
+  mostrarDetalles(pelicula: { title: string; description: string; id: string; }) {
+    alert("Detalles de la película:\n\nTítulo: " + pelicula.title + "\nDescripción: " + pelicula.description + "\nID: " + pelicula.id);
+  }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { PeliculaService } from '../pelicula.service';
+import { Pelicula } from '../models/pelicula.model';
 
 @Component({
   selector: 'app-actualizar-pelicula',
@@ -9,17 +9,14 @@ import { PeliculaService } from '../pelicula.service';
 })
 export class FormularioActualizarPeliculaComponent implements OnInit {
   formularioActualizar: FormGroup;
-  peliculaId!: string;
-  peliculas: any[] = [];
+  peliculas: Pelicula[] = [];
 
   constructor(
     private fb: FormBuilder,
-    private route: ActivatedRoute,
     private peliculaService: PeliculaService
   ) {
     this.formularioActualizar = this.fb.group({
       pelicula: ['', Validators.required],
-      titulo: ['', Validators.required],
       director: ['', Validators.required],
       descripcion: ['', Validators.required],
       // Agrega más campos según tus necesidades
@@ -28,26 +25,17 @@ export class FormularioActualizarPeliculaComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtenerPeliculas();
-    this.obtenerPeliculaId();
   }
 
   obtenerPeliculas(): void {
     this.peliculaService.obtenerTodasLasPeliculas().subscribe(
-      (peliculas) => {
+      (peliculas: Pelicula[]) => {
         this.peliculas = peliculas;
       },
-      (error) => {
+      (error: any) => {
         console.error('Error al obtener las películas:', error);
       }
     );
-  }
-
-  obtenerPeliculaId(): void {
-    const peliculaIdParam = this.route.snapshot.paramMap.get('id');
-    this.peliculaId = peliculaIdParam !== null ? peliculaIdParam : '';
-    if (this.peliculaId) {
-      this.obtenerPelicula();
-    }
   }
 
   onPeliculaSeleccionada(event: any): void {
@@ -59,34 +47,18 @@ export class FormularioActualizarPeliculaComponent implements OnInit {
     const peliculaSeleccionada = this.peliculas.find(pelicula => pelicula.id === id);
     if (peliculaSeleccionada) {
       this.formularioActualizar.patchValue({
-        titulo: peliculaSeleccionada.titulo,
         director: peliculaSeleccionada.director,
         descripcion: peliculaSeleccionada.descripcion,
       });
     }
   }
 
-  obtenerPelicula(): void {
-    if (this.peliculaId) {
-      this.peliculaService.obtenerPeliculaPorId(this.peliculaId).subscribe(
-        (pelicula) => {
-          this.formularioActualizar.patchValue({
-            titulo: pelicula.titulo,
-            director: pelicula.director,
-            descripcion: pelicula.descripcion,
-          });
-        },
-        (error) => {
-          console.error('Error al obtener la película:', error);
-        }
-      );
-    }
-  }
-
   onSubmit(): void {
-    if (this.formularioActualizar.valid && this.peliculaId) {
+    if (this.formularioActualizar.valid) {
       const datosActualizados = this.formularioActualizar.value;
-      this.peliculaService.actualizarPelicula(this.peliculaId, datosActualizados).subscribe(
+      const peliculaId = datosActualizados.pelicula;
+      delete datosActualizados.pelicula; // Eliminamos el campo 'pelicula' del objeto de datos
+      this.peliculaService.actualizarPelicula(peliculaId, datosActualizados).subscribe(
         () => {
           console.log('Película actualizada correctamente');
           // Puedes redirigir a otra ruta después de la actualización si lo deseas

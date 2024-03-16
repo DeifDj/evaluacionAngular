@@ -1,0 +1,62 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+  }
+  
+  header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .app-header {
+    background-color: #ff6347; /* Color de fondo rojo naranja */
+    color: #fff; /* Color de texto blanco */
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .app-title {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .app-tagline {
+    font-size: 18px;
+  }
+  
+  .titulo {
+    font-size: 3em;
+  }
+  
+  .subtitulo {
+    font-size: 1.5em;
+  }
+  
+  main {
+    padding: 20px;
+  }
+  
+  .destacado, .cartelera, .categorias {
+    margin-bottom: 30px;
+  }
+  
+  .destacado h2, .cartelera h2, .categorias h2 {
+    font-size: 2em;
+    color: #333;
+  }
+  
+  footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+  
