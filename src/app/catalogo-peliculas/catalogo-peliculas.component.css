@@ -1,6 +1,6 @@
 /* Estilos para el contenedor de películas */
 .contenedor-peliculas {
-    overflow-y: auto; /* Permite el desplazamiento vertical */
+    overflow-x: hidden; /* Permite el desplazamiento vertical */
     max-height: 700px; /* Altura máxima del contenedor, ajusta según sea necesario */
   }
   
@@ -42,4 +42,3 @@
     color: #666;
     margin-top: 5px; /* Ajusta el margen superior de la descripción */
   }
-  

@@ -46,7 +46,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   public cargarPeliculas(): void {
-    this.subscription = this.peliculaService.obtenerPeliculas().subscribe(
+    this.subscription = this.peliculaService.obtenerTodasLasPeliculas().subscribe(
       (peliculas) => {
         this.peliculas = peliculas;
         this.localStorageService.setItem('peliculas', peliculas);

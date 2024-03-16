@@ -32,7 +32,7 @@ export class FormularioActualizarPeliculaComponent implements OnInit {
   }
 
   obtenerPeliculas(): void {
-    this.peliculaService.obtenerPeliculas().subscribe(
+    this.peliculaService.obtenerTodasLasPeliculas().subscribe(
       (peliculas) => {
         this.peliculas = peliculas;
       },

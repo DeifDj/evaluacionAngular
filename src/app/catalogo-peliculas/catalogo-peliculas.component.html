@@ -1,11 +1,21 @@
 <div class="contenedor-peliculas">
+  <!-- Ciclo ngFor para iterar sobre las películas -->
   <div class="pelicula" *ngFor="let pelicula of peliculas">
+    <!-- Imagen de la película -->
     <img [src]="pelicula.imageUrl" alt="Imagen de la película">
+    <!-- Información de la película -->
     <div class="informacion">
+      <!-- Título de la película -->
       <h2 class="pelicula-titulo">{{ pelicula.title }}</h2>
+      <!-- Descripción de la película -->
       <p class="pelicula-descripcion">{{ pelicula.description }}</p>
+      <!-- ID de la película -->
+      <p>ID: {{ pelicula.id }}</p>
     </div>
   </div>
+  <!-- Botón para actualizar el catálogo -->
+  <button (click)="actualizarCatalogo()">Actualizar Catálogo</button>
 </div>
+
 
   <router-outlet></router-outlet>

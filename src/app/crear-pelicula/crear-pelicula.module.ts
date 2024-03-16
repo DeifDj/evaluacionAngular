@@ -11,7 +11,7 @@ import { CrearPeliculaComponent } from './crear-pelicula.component';
 
 @NgModule({
   declarations: [
-    CrearPeliculaComponent
+    
   ],
   imports: [
     CommonModule,
